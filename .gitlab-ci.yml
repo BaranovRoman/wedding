@@ -19,6 +19,5 @@ image: alpine
 
 stages:
     - build
-    - test
     - deploy
     - deploy_after
