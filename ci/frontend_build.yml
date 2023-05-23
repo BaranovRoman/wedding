@@ -2,8 +2,6 @@ frontend_build:
     image: $IMAGE_FRONTEND
     stage: build
     variables: !reference [.variables, common]
-    tags:
-        - build-runner
     cache:
         - key:
               files:

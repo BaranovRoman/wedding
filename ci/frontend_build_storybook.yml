@@ -2,8 +2,6 @@ frontend_build_storybook:
     image: $IMAGE_FRONTEND
     stage: build
     variables: !reference [.variables, common]
-    tags:
-        - build-runner
     rules:
         - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == "master"'
           when: never
