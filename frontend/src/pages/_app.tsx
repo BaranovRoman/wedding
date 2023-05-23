@@ -24,7 +24,7 @@ if (typeof window !== 'undefined') {
 const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
     const router = useRouter();
     const prevBodyClass = usePrevious(pageProps.bodyClass);
-
+    console.log(123);
     /**
      * Смена класса на <html> при переходах между страницами
      */

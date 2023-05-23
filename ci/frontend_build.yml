@@ -13,7 +13,6 @@ frontend_build:
           paths:
               - frontend/.next/cache/
           policy: pull-push
-
     artifacts:
         paths:
             - frontend/.next/
