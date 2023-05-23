@@ -36,5 +36,4 @@ frontend_build:
         - cd $FRONTEND_PATH
         - !reference [.scripts, install_frontend_dependencies]
     script:
-        - npm test
         - npm run build

@@ -1,7 +1,6 @@
 .variables:
     common: &common # Глобальные переменные
         IMAGE_FRONTEND: node:18-alpine
-        E2E_TESTING_IMAGE: mcr.microsoft.com/playwright:v1.31.2-focal
         GIT_DEPTH: 1
         SSH_PORT: 22
         PM2_PROCESS_NAME: "barash"
