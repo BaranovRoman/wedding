@@ -1,22 +1,14 @@
 .variables:
-  common: &common # Глобальные переменные
-    IMAGE_FRONTEND: node:18-alpine
-    E2E_TESTING_IMAGE: mcr.microsoft.com/playwright:v1.31.2-focal
-    GIT_DEPTH: 1
-    SSH_PORT: 22
-    PM2_PROCESS_NAME: "<<[PROCESS_NAME]>>"
-    FRONTEND_PATH: ./frontend
-    BACKEND_PATH: ./backend
-  dev: # Переменные для дева
-    <<: *common
-    ENV_PRIVATE_KEY: $STAGING_PRIVATE_KEY
-    PROJECT_HOST: "chipsa@91.230.210.213"
-    PROJECT_PATH: "/var/www/chipsa/data/www/<<[PROJECT_FOLDER_HERE]>>/"
-    BRANCH_NAME: dev
-    SSH_PORT: 33022
-  prod: # Переменные для продакшена
-    <<: *common
-    ENV_PRIVATE_KEY: $PRODUCTION_PRIVATE_KEY
-    PROJECT_HOST: "<<[PROJECT_HOST_HERE]>>"
-    PROJECT_PATH: "<<[PROJECT_PATH_HERE]>>"
-    BRANCH_NAME: master
+    common: &common # Глобальные переменные
+        IMAGE_FRONTEND: node:18-alpine
+        E2E_TESTING_IMAGE: mcr.microsoft.com/playwright:v1.31.2-focal
+        GIT_DEPTH: 1
+        SSH_PORT: 22
+        PM2_PROCESS_NAME: "barash"
+        FRONTEND_PATH: ./frontend
+    prod: # Переменные для продакшена
+        <<: *common
+        ENV_PRIVATE_KEY: $PRODUCTION_PRIVATE_KEY
+        PROJECT_HOST: "www-root@188.120.230.17"
+        PROJECT_PATH: "/var/www/www-root/data/www/barash-wedding.ru/"
+        BRANCH_NAME: master

@@ -1,34 +1,25 @@
 .frontend_deploy:
-  stage: deploy
-  variables: !reference [.variables, common]
-  dependencies:
-    - frontend_build
-  before_script:
-    - !reference [.scripts, script]
-  script:
-    - !reference [.scripts, install_deploy_deps]
-    # Копируем билд фронтенда с сервера gitlab ci
-    - rsync -arvh --delete-after --exclude='$FRONTEND_PATH/.next/cache' -e "ssh -p $SSH_PORT" $FRONTEND_PATH/.next $PROJECT_HOST:$PROJECT_PATH/$FRONTEND_PATH
-    # Перезапускаем pm2
-    - ssh -p $SSH_PORT $PROJECT_HOST "cd $PROJECT_PATH/$FRONTEND_PATH/ && pm2 restart $PM2_PROCESS_NAME"
-    # Пуллим изменения из удаленного репозитория
-    - !reference [.scripts, git_pull]
-
-frontend_deploy_dev:
-  extends: .frontend_deploy
-  variables: !reference [.variables, dev]
-  environment:
-    name: dev
-  rules:
-    - if: $CI_COMMIT_BRANCH == "dev"
-      changes: !reference [.changes, frontend_build]
+    stage: deploy
+    variables: !reference [.variables, common]
+    dependencies:
+        - frontend_build
+    before_script:
+        - !reference [.scripts, script]
+    script:
+        - !reference [.scripts, install_deploy_deps]
+        # Копируем билд фронтенда с сервера gitlab ci
+        - rsync -arvh --delete-after --exclude='$FRONTEND_PATH/.next/cache' -e "ssh -p $SSH_PORT" $FRONTEND_PATH/.next $PROJECT_HOST:$PROJECT_PATH/$FRONTEND_PATH
+        # Перезапускаем pm2
+        - ssh -p $SSH_PORT $PROJECT_HOST "cd $PROJECT_PATH/$FRONTEND_PATH/ && pm2 restart $PM2_PROCESS_NAME"
+        # Пуллим изменения из удаленного репозитория
+        - !reference [.scripts, git_pull]
 
 frontend_deploy_prod:
-  extends: .frontend_deploy
-  variables: !reference [.variables, prod]
-  environment:
-    name: prod
-  rules:
-    - if: $CI_COMMIT_BRANCH == "master"
-      when: never
-      changes: !reference [.changes, frontend_build]
+    extends: .frontend_deploy
+    variables: !reference [.variables, prod]
+    environment:
+        name: prod
+    rules:
+        - if: $CI_COMMIT_BRANCH == "master"
+          when: always
+          changes: !reference [.changes, frontend_build]
