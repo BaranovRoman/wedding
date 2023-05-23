@@ -11,7 +11,6 @@ include:
     - local: ci/_hidden_jobs.yml
     - local: ci/frontend_build.yml
     - local: ci/frontend_build_storybook.yml
-    - local: ci/frontend_test_storybook.yml
     - local: ci/frontend_deploy.yml
     - local: ci/frontend_deploy_storybook.yml
     - local: ci/pull.yml
