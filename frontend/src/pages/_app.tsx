@@ -50,7 +50,7 @@ const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
     }, [pageProps.bodyClass, prevBodyClass]);
 
     useEffect(() => {
-        if (gApiLoaded) {
+        if (gApiLoaded && gapi) {
             function initClient() {
                 gapi.client
                     .init({
@@ -68,7 +68,7 @@ const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
                         // Добавление записи в таблицу
                         //   addRecord();
                     })
-                    .catch(function (error) {
+                    .catch(function (error: string) {
                         console.log('Ошибка аутентификации: ', error);
                     });
             }
