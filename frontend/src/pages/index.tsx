@@ -6,7 +6,7 @@ const IndexPage = () => {
     return (
         <DefaultLayout>
             <div className="wrapper">
-                <h1>Next.js boilerplate</h1>
+                <h1>Barash wedding</h1>
             </div>
         </DefaultLayout>
     );
