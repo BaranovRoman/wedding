@@ -12,7 +12,7 @@ const IndexPage = () => {
         <DefaultLayout>
             <div className="wrapper">
                 <div className="canvas-wrapper">
-                    <Canvas
+                    {/* <Canvas
                         camera={{
                             position: [10, 15, 10],
                             fov: 32.27,
@@ -23,7 +23,7 @@ const IndexPage = () => {
                         <ambientLight />
                         <pointLight position={[30, 30, 10]} />
                         <Model />
-                    </Canvas>
+                    </Canvas> */}
                 </div>
             </div>
         </DefaultLayout>
