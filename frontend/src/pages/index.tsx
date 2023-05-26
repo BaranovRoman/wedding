@@ -5,28 +5,24 @@ import { useLoader, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-
-const Model = ({ url }: { url: string }) => {
-    const gltf = useLoader(GLTFLoader, url);
-    const modelRef = useRef();
-    const { scene } = useThree();
-
-    // Добавляем модель в сцену
-    scene.add(gltf.scene);
-
-    return <primitive ref={modelRef} object={gltf.scene} />;
-};
+import { Model } from 'public/Model';
 
 const IndexPage = () => {
     return (
         <DefaultLayout>
             <div className="wrapper">
-                <h1>Barash wedding</h1>
                 <div className="canvas-wrapper">
-                    <Canvas>
+                    <Canvas
+                        camera={{
+                            position: [10, 15, 10],
+                            fov: 32.27,
+                            near: 10,
+                            far: 1000,
+                        }}
+                    >
                         <ambientLight />
-                        <pointLight position={[10, 10, 10]} />
-                        <Model url="model.glb" />
+                        <pointLight position={[30, 30, 10]} />
+                        <Model />
                     </Canvas>
                 </div>
             </div>

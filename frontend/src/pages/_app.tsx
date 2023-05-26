@@ -91,13 +91,13 @@ const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
             <Providers>
                 <AppInits />
                 <AppHead host={pageProps.host} />
-                <Header />
+                {/* <Header /> */}
                 <main className="main">
                     <TransitionLayout>
                         <Component {...pageProps} key={router.asPath} />
                     </TransitionLayout>
                 </main>
-                <Footer />
+                {/* <Footer /> */}
                 {process.env.NODE_ENV === 'development' && <LayoutGrid />}
             </Providers>
         </>
