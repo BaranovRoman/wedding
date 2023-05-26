@@ -5,7 +5,7 @@ import { useLoader, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Model } from 'public/Model';
+import { Model } from '../components/Model';
 
 const IndexPage = () => {
     return (
