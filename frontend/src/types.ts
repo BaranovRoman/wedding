@@ -14,3 +14,11 @@ export interface ImageShape {
     width: number;
     height: number;
 }
+
+export type PersonData = {
+    hash: string;
+    names: string;
+    welcome: string;
+    accept_script_id: string;
+    decline_script_id: string;
+};

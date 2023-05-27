@@ -14,6 +14,7 @@ import { usePrevious } from '@/hooks/use-previous';
 import AppInits from '@/components/general/AppInits';
 import AppHead from '@/components/general/AppHead';
 import { BasePageProps } from '@/types';
+import axios from 'axios';
 
 import Script from 'next/script';
 
@@ -26,7 +27,6 @@ if (typeof window !== 'undefined') {
 const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
     const router = useRouter();
     const prevBodyClass = usePrevious(pageProps.bodyClass);
-    const [gApiLoaded, setGApiLoaded] = useState(false);
 
     /**
      * Смена класса на <html> при переходах между страницами
@@ -49,53 +49,8 @@ const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
         };
     }, [pageProps.bodyClass, prevBodyClass]);
 
-    useEffect(() => {
-        if (gApiLoaded && google) {
-            console.log(google);
-            google.accounts.id.initialize({
-                client_id: '730516144104-tpu2cqfiasss5v079hn6hmkvd63rh3dp.apps.googleusercontent.com',
-                callback: () => {
-                    console.log(123);
-                },
-            });
-            google.accounts.id.prompt();
-            // function initClient() {
-            //     gapi.client
-            //         .init({
-            //             apiKey: 'AIzaSyB1KLd8thUu6DXJBEdwgGDuNlAgPEqjQwI',
-            //             clientId: '730516144104-tpu2cqfiasss5v079hn6hmkvd63rh3dp.apps.googleusercontent.com',
-            //             discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-            //             scope: 'https://www.googleapis.com/auth/spreadsheets',
-            //         })
-            //         .then(function () {
-            //             // Аутентификация пользователя
-            //             console.log('success');
-            //             return gapi.auth2.getAuthInstance().signIn();
-            //         })
-            //         .then(function () {
-            //             // Добавление записи в таблицу
-            //             //   addRecord();
-            //         })
-            //         .catch(function (error: string) {
-            //             console.log('Ошибка аутентификации: ', error);
-            //         });
-            // }
-
-            // gapi.load('client:auth2', initClient);
-        }
-    }, [gApiLoaded]);
-
     return (
         <>
-            <Script
-                src="https://accounts.google.com/gsi/client"
-                strategy="lazyOnload"
-                onLoad={() => {
-                    if (!gApiLoaded) {
-                        setGApiLoaded(true);
-                    }
-                }}
-            />
             <Providers>
                 <AppInits />
                 <AppHead host={pageProps.host} />
