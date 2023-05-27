@@ -3,11 +3,32 @@ import { BasePageProps } from '@/types';
 import DefaultLayout from '@/components/layout/DefaultLayout';
 import { useLoader, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Model } from '../components/Model';
+import { useRouter } from 'next/router';
+
+import { guestData } from '@/guest-data';
 
 const IndexPage = () => {
+    const { asPath } = useRouter();
+    const [hash, setHash] = useState('');
+
+    useEffect(() => {
+        setHash((asPath as string).split('#')[1]);
+    }, [asPath]);
+
+    useEffect(() => {
+        if (hash) {
+            const data = guestData.find((item) => {
+                return item.hash === hash;
+            });
+            if (data) {
+                alert(`Дорогие ${data.names} - ${data.welcome}`);
+            }
+        }
+    }, [hash]);
+
     return (
         <DefaultLayout>
             <div className="wrapper">
