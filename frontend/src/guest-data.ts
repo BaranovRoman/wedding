@@ -95,7 +95,8 @@ export const guestData: PersonData[] = [
     {
         hash: '8d0815f7',
         names: 'Ростислав и Александра',
-        welcome: '<3',
+        welcome:
+            'Брат, шашлычник сказал не придёт, приезжай. Саша, а тебя приглашаем, как званого гостя, будем очень рады вас увидеть!',
         accept_script_id: 'AKfycbyJdGxBBfPIp3UO8H-a9pZPEFz-I6aravmLK5cWUU2XFYpy_Dz6BChWSc78aQbs_fa1',
         decline_script_id: 'AKfycbzxJgLjNYIyIJ9qPNdmnybgwdmPm49R8yG28CwxSTlI1ESbdtyT1NJEMB_mAfOz-oH1',
     },
