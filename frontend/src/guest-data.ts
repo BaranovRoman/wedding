@@ -31,7 +31,7 @@ export const guestData: PersonData[] = [
     },
     {
         hash: '71def424',
-        names: 'Ринат + 1',
+        names: 'Ринат + Юлия',
         welcome: '<3',
         accept_script_id: 'AKfycbwOaPJi3WU9wu2TTFCYfn5yXBac0qU2mP5t-iWs1VIHBFQyTKQwlRSmczcR09Q3MyDr',
         decline_script_id: 'AKfycbwj9mBPQ6M22VqAhc_AeET6hjmu3uIrESKCmpxznKZgs-d4iKpSbC_1YA8JW1uq7ZIc',
@@ -127,5 +127,26 @@ export const guestData: PersonData[] = [
         welcome: '<3',
         accept_script_id: 'AKfycbwgd2ndScOyaaINf7tSx9uJHfoZqePA6TRZUHfmm4uldoLCyB7IJ1cgov_H1xhlV6On',
         decline_script_id: 'AKfycby9S9AbCe6S06Idbe5QOV67Gn5TxqjSlS45SW44YH4S5_WHwije7Od-2cAIHdp4F4zE',
+    },
+    {
+        hash: '9a1287fd',
+        names: 'Тётя Зиля и Настя',
+        welcome: '<3',
+        accept_script_id: 'AKfycbw5-Fuj5dQz21Q1yHWOrURbsBbrljjKiLSrkySEpFP5WxSzWuP0ens4FMyQnKB2Oc_P',
+        decline_script_id: 'AKfycbxqLuLHulH7Zj4w6aMb5bKRX9PlOUCCTOab81JdzPuAbMeE7GrRDiIPVmMVHOCGBUfp',
+    },
+    {
+        hash: '0da7d2b8',
+        names: 'Абузярова',
+        welcome: '<3',
+        accept_script_id: 'AKfycbzrVwih1l6R-xDkUcXQNgU19eiGXKIsQ4bEkuqDcrAoZwF4cusd3LGrTLEGA5GRE7vz',
+        decline_script_id: 'AKfycbwH_YBUrX8FrbE6MxJ4SBbPUdsZRhqpxJaOA5y2Ty5AMou-MNOgPnUQkMBvmBIe05ZM',
+    },
+    {
+        hash: 'ea786cde',
+        names: 'Дима Пузаков',
+        welcome: '<3',
+        accept_script_id: 'AKfycbzfr0WWjNmHz9r2u3rU3qQZFb2jZIO2c3cFu8vv26Ht91pf6lOJoD0hpJZKPrPL0rhp',
+        decline_script_id: 'AKfycbycEL10az41eLdlBS-BitrTyfj0A27uWHz5j9SpOnO98k0sF7SBW_CN5U-VDRPsPyuQ',
     },
 ];
