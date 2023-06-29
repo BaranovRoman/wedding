@@ -1,3 +1,5 @@
+'use client';
+
 import { GetStaticProps } from 'next';
 import { BasePageProps, PersonData } from '@/types';
 import DefaultLayout from '@/components/layout/DefaultLayout';
