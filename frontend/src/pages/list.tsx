@@ -5,7 +5,6 @@ import { useLoader, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRef, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Model } from '../components/Model';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { guestData } from '@/data';

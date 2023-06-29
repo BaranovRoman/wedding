@@ -11,6 +11,8 @@ import gsap from 'gsap';
 
 interface Props {
     text: string;
+    count?: number;
+    depth?: number;
 }
 
 function getRandomInRange(min: number, max: number) {
@@ -39,11 +41,19 @@ const materialForText = new THREE.MeshMatcapMaterial();
 const materialForButton = new THREE.MeshMatcapMaterial();
 const materialForTextInButton = new THREE.MeshMatcapMaterial();
 
-const Ring = ({ z }) => {
-    const ref = useRef();
-    const { nodes, materials } = useGLTF('/Rings-transformed.glb');
+type GLTFResult = GLTF & {
+    nodes: {
+        ring_small: THREE.Mesh;
+    };
+    materials: {
+        Mat: THREE.MeshStandardMaterial;
+    };
+};
+
+const Ring = ({ z }: { z: number }) => {
+    const ref = useRef<THREE.Mesh>();
+    const { nodes, materials } = useGLTF('/model/Rings-transformed.glb') as GLTFResult;
     const { viewport, camera } = useThree();
-    console.log(nodes, materials);
     const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z]);
     const [data] = useState({
         x: THREE.MathUtils.randFloatSpread(2),
@@ -54,13 +64,15 @@ const Ring = ({ z }) => {
     });
 
     useFrame((state) => {
-        ref.current.rotation.set((data.rX += 0.001), (data.rY += 0.001), (data.rZ += 0.001));
-        ref.current.position.set(data.x * width, (data.y += 0.01), z);
-        if (data.y > height / 1.5) {
-            data.y = -height / 1.5;
+        if (ref.current) {
+            ref.current.rotation.set((data.rX += 0.001), (data.rY += 0.001), (data.rZ += 0.001));
+            ref.current.position.set(data.x * width, (data.y += 0.01), z);
+            if (data.y > height / 1.5) {
+                data.y = -height / 1.5;
+            }
         }
     });
-
+    // @ts-ignore
     return <mesh ref={ref} geometry={nodes.ring_small.geometry} material={materials.Mat} scale={880.581} />;
 };
 
@@ -100,23 +112,6 @@ const Hello = ({ text, count = 100, depth = 50 }: Props) => {
     return (
         <>
             <Environment background={false} blur={0.1} files="/studio_small_08_4k.hdr" />
-            {/* <Center>
-                <Text3D
-                    font="./fonts/Caveat_Regular.json"
-                    size={mediaQueryDevice === 'desktop' ? 0.15 : 0.15}
-                    height={mediaQueryDevice === 'desktop' ? 0.01 : 0.05}
-                    curveSegments={4}
-                    lineHeight={0.75}
-                    bevelEnabled
-                    bevelThickness={0.01}
-                    bevelSize={0.01}
-                    bevelOffset={0}
-                    bevelSegments={15}
-                    material={materialForText}
-                >
-                    {text}
-                </Text3D>
-            </Center> */}
 
             {[...Array(count)].map((_, i) => {
                 return <Ring key={i} z={-(i / count) * depth - 20} />;

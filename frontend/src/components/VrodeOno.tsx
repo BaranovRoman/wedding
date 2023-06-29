@@ -42,11 +42,6 @@ type GLTFResult = GLTF & {
 
 export function Model(props: JSX.IntrinsicElements['group']) {
     const { nodes, materials } = useGLTF('/model/VrodeOno-transformed.glb') as GLTFResult;
-    const ref = useRef();
-
-    useFrame((state, delta) => {
-        // ref.current.rotation.y += delta / 10;
-    });
 
     return (
         <group {...props} dispose={null}>
@@ -62,7 +57,6 @@ export function Model(props: JSX.IntrinsicElements['group']) {
             <mesh
                 castShadow
                 receiveShadow
-                ref={ref}
                 geometry={nodes.Flowers1001.geometry}
                 material={materials.Flowers}
                 position={[-0.932, 0.511, -0.35]}

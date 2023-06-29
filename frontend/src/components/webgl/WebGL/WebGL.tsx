@@ -21,7 +21,6 @@ import {
 import Light from './Light';
 
 import FlyingCamera from '../FlyingCamera';
-import { flowersData } from '@/flowers-data';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
