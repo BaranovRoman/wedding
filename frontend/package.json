@@ -7,7 +7,7 @@
         "watch": "next dev",
         "build": "next build",
         "ba": "ANALYZE=true next build",
-        "start": "dotenv -- next start",
+        "start": "next start",
         "lint": "next lint",
         "format": "prettier --ignore-unknown --write \"src/**/*\"",
         "tsc": "tsc --noEmit --pretty",
