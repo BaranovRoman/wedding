@@ -74,13 +74,13 @@ const WebGL = ({ helloText }: Props) => {
                 <hemisphereLight args={[0xff0000, 0x0000ff, 0.05]} />
                 {/* <OrbitControls makeDefault /> */}
 
-                {/* <Suspense fallback={null}>
+                <Suspense fallback={null}>
                     <Hello text={helloText} />
-                </Suspense> */}
-                <Model />
-                <ScrollControls pages={totalScreens} distance={2} damping={3}>
+                </Suspense>
+                {/* <Model /> */}
+                {/* <ScrollControls pages={totalScreens} distance={2} damping={3}>
                     <FlyingCamera />
-                </ScrollControls>
+                </ScrollControls> */}
             </Canvas>
         </div>
     );
