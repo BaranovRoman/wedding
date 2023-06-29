@@ -8,7 +8,7 @@ import { Canvas } from '@react-three/fiber';
 import { Model } from '../components/Model';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { guestData } from '@/guest-data';
+import { guestData } from '@/data';
 
 import Link from 'next/link';
 

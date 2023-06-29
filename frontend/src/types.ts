@@ -19,6 +19,9 @@ export type PersonData = {
     hash: string;
     names: string;
     welcome: string;
+    welcome_mobile: string;
     accept_script_id: string;
     decline_script_id: string;
 };
+
+export type Vector = { x: number; y: number; z: number };

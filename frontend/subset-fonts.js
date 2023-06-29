@@ -6,8 +6,8 @@ const childProcess = require('child_process');
 
 const logger = weblog({ name: 'fonts-subsets' });
 
-const FONTS_SRC = `./src/fonts/src`;
-const FONTS_DIST = `./src/fonts`;
+const FONTS_SRC = `./public/fonts/src`;
+const FONTS_DIST = `./public/fonts`;
 
 glob(
     `${FONTS_SRC}/**/*.{ttf,otf}`,

@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { usePathname } from 'next/navigation';
 
-export const WEBSITE_NAME = '[WEBSITE NAME]';
-const WEBSITE_DESCRIPTION = '[DESCRIPTION]';
+export const WEBSITE_NAME = 'Свадьба Барановых';
+const WEBSITE_DESCRIPTION = '#барашсвадьба';
 const WEBSITE_OG_IMAGE = '/img/og-image.jpg';
 
 interface Props {
@@ -28,15 +28,13 @@ const AppHead = ({ host = '' }: Props) => {
             <meta name="twitter:title" content={WEBSITE_NAME} />
             <meta name="twitter:description" content={WEBSITE_DESCRIPTION} />
             <link rel="icon" href="/img/favicon/favicon.ico" />
-            {/* <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> */}
-
-            {/* <link
+            <link
                 rel="preload"
-                href="/fonts/FormaDJRText-Regular.woff2"
+                href="/fonts/Cormorant-Regular.woff2"
                 as="font"
                 type="font/woff2"
                 crossOrigin="anonymous"
-            /> */}
+            />
         </Head>
     );
 };

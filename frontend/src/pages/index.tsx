@@ -5,15 +5,22 @@ import { useLoader, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRef, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Model } from '../components/Model';
+// import { Model } from '../components/Model';
+// import { Model } from '../components/NewModel';
+import { Model } from '../components/ExportModel';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { guestData } from '@/guest-data';
+import { guestData } from '@/data';
+import WebGL from '@/components/webgl/WebGL/WebGL';
+import { useMediaQueryDeviceState } from '@/atoms/media-query-device';
+import HelloHtml from '@/components/dom/HelloHtml';
 
 const IndexPage = () => {
     const { asPath } = useRouter();
     const [hash, setHash] = useState('');
     const [data, setData] = useState<PersonData | null>(null);
+    const [mediaQueryDevice] = useMediaQueryDeviceState();
+    const [welcomeMessage, setWelcomeMessage] = useState('Приветствуем, \nна нашем сайте');
 
     useEffect(() => {
         setHash((asPath as string).split('#')[1]);
@@ -31,6 +38,12 @@ const IndexPage = () => {
         }
     }, [hash]);
 
+    useEffect(() => {
+        if (data && mediaQueryDevice) {
+            setWelcomeMessage(mediaQueryDevice !== 'desktop' ? data.welcome_mobile : data.welcome);
+        }
+    }, [data, mediaQueryDevice]);
+
     const fetchToSheet = (script_id: string) => {
         axios
             .get(`https://script.google.com/macros/s/${script_id}/exec`)
@@ -46,7 +59,7 @@ const IndexPage = () => {
         <DefaultLayout>
             <div className="wrapper">
                 <div className="canvas-wrapper">
-                    {data && (
+                    {/* {data && (
                         <div className="banner">
                             <h1>
                                 Приветствуем, {data.names} - сообщение для вас - {data.welcome}
@@ -70,19 +83,9 @@ const IndexPage = () => {
                                 Отклонить участие
                             </button>
                         </div>
-                    )}
-                    <Canvas
-                        camera={{
-                            position: [10, 15, 10],
-                            fov: 32.27,
-                            near: 10,
-                            far: 1000,
-                        }}
-                    >
-                        <ambientLight />
-                        <pointLight position={[30, 30, 10]} />
-                        <Model />
-                    </Canvas>
+                    )} */}
+                    <HelloHtml />
+                    <WebGL helloText={welcomeMessage} />
                 </div>
             </div>
         </DefaultLayout>

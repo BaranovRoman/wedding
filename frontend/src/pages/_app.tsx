@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import Providers from '@/components/layout/Providers';
-import Header from '@/components/layout/Header';
 import LayoutGrid from '@/components/utils/LayoutGrid';
 import TransitionLayout from '@/components/layout/TransitionLayout';
-import Footer from '@/components/layout/Footer';
 import vhMobileFix from '@/utils/vh-mobile-fix';
 import { calculateScrollbarWidth } from '@/utils/calculate-scrollbar-width';
 import { usePrevious } from '@/hooks/use-previous';
@@ -54,13 +52,11 @@ const App = ({ Component, pageProps }: AppProps<BasePageProps>) => {
             <Providers>
                 <AppInits />
                 <AppHead host={pageProps.host} />
-                {/* <Header /> */}
                 <main className="main">
                     <TransitionLayout>
                         <Component {...pageProps} key={router.asPath} />
                     </TransitionLayout>
                 </main>
-                {/* <Footer /> */}
                 {process.env.NODE_ENV === 'development' && <LayoutGrid />}
             </Providers>
         </>

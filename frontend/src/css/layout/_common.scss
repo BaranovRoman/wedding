@@ -6,21 +6,19 @@ html {
     background-color: $body-bg;
     color: $body-color;
     overflow: overlay;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    min-height: calc(var(--vh, 1vh) * 100);
+    font-family: Cormorant;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-size-adjust: 100%;
+    font-size-adjust: 100%;
+    background-color: #dfdcd6;
 
     &.no-scroll {
         overflow: hidden;
         padding-right: var(--scrollbar-width, 0px);
     }
-}
-
-body {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    min-height: calc(var(--vh, 1vh) * 100);
-    font-family: $font-family;
-    display: flex;
-    flex-direction: column;
-    -webkit-font-size-adjust: 100%;
-    font-size-adjust: 100%;
 }
 
 .js-focus-visible :focus:not(.focus-visible) {
@@ -139,4 +137,54 @@ body {
     flex-direction: column;
     gap: 20px;
     font-size: 24px;
+}
+
+.hello-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    padding: 66px var(--offset-x) 40px var(--offset-x);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hello-layout__top {
+    align-self: flex-start;
+    @include responsive-font-size(32px, 48px, 1280px, 1920px);
+    line-height: 107.9%;
+    letter-spacing: -1.68px;
+}
+
+.hello-layout__bottom {
+    align-self: flex-end;
+    @include responsive-font-size(32px, 48px, 1280px, 1920px);
+    line-height: 107.9%;
+    letter-spacing: -1.68px;
+}
+
+.hello-layout__center {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center__title {
+    @include responsive-font-size(64px, 96px, 1280px, 1920px);
+    line-height: 107.9%;
+}
+
+.center__description {
+    @include responsive-font-size(24px, 36px, 1280px, 1920px);
+    line-height: 107.9%;
+    letter-spacing: -1.68px;
+}
+
+.center__icon {
+    margin-bottom: 48px;
 }
