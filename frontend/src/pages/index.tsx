@@ -84,7 +84,7 @@ const IndexPage = () => {
                         </div>
                     )} */}
                     <HelloHtml />
-                    <WebGL helloText={welcomeMessage} />
+                    {/* <WebGL helloText={welcomeMessage} /> */}
                 </div>
             </div>
         </DefaultLayout>
