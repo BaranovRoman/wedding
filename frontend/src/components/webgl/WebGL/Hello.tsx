@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect, useRef } from 'react';
 import { useMatcapTexture, Center, Text3D, OrbitControls, useGLTF, Environment } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
