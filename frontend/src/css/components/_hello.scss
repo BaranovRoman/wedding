@@ -18,6 +18,11 @@
     padding-top: 66px;
     flex: 1 1 100%;
     @include scrollbar(#343434);
+
+    @include mobile {
+        padding-top: 24px;
+        padding-bottom: 66px;
+    }
 }
 
 .hello-layout--out {
@@ -47,12 +52,23 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 10px;
+
+    @include mobile {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 24px;
+        align-items: flex-end;
+        margin-bottom: 64px;
+    }
 }
 
 .hello-layout__content {
     display: flex;
-    flex-wrap: nowrap;
-    margin-top: 48px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .hello-layout__left {
@@ -72,10 +88,47 @@
 }
 
 .hello-layout__message {
-    @include responsive-font-size(24px, 36px, 1280px, 1920px);
+    @include responsive-font-size(18px, 24px, 1280px, 1920px);
     margin-bottom: 36px;
+    max-width: 1160px;
+    columns: 2;
+    column-gap: 26px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+
+    @media screen and (min-width: 1921px) {
+        font-size: 32px;
+        max-width: 1280px;
+    }
+
+    @include mobile {
+        columns: 1;
+    }
 
     p {
         margin-bottom: 36px;
+
+        @include mobile {
+            margin-bottom: 16px;
+        }
+    }
+}
+
+.hello-layout__personal {
+    display: flex;
+    flex-direction: column;
+}
+
+.hello-layout__sign {
+    margin-bottom: 76px;
+}
+
+.hello-hello {
+    @include responsive-font-size(48px, 64px, 1280px, 1920px);
+    margin-bottom: 42px;
+
+    @include mobile {
+        font-size: 32px;
     }
 }

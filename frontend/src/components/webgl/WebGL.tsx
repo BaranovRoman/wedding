@@ -55,7 +55,7 @@ const WebGL = () => {
                 flat
                 gl={{
                     alpha: false,
-                    toneMapping: THREE.ACESFilmicToneMapping,
+                    toneMapping: THREE.ReinhardToneMapping,
                     antialias: gpuState ? shouldUseAntialiasing(gpuState) : false,
                 }}
                 dpr={dpr}
@@ -66,7 +66,6 @@ const WebGL = () => {
                     far: 110,
                 }}
             >
-                {/* <OrbitControls makeDefault /> */}
                 <Preload all />
                 <Experience />
                 <Background />

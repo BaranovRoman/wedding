@@ -10,28 +10,33 @@
 .rsyp-popup__inner {
     background-color: #dfdcd6;
     position: absolute;
-    bottom: 0;
-    left: 10vw;
-    width: 80vw;
-    max-height: calc(100vh - 100px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: calc(100vh - 60px);
+    max-width: 660px;
     height: auto;
-    border-radius: 50px 50px 0 0;
-    padding-inline: 100px;
-    padding-top: 100px;
-    @include responsive-font-size(24px, 36px, 1280px, 1920px);
+    border-radius: 21px;
+    padding-inline: 80px;
+    padding-top: 44px;
     display: flex;
+    width: 100%;
+
+    @media screen and (min-width: 1921px) {
+        max-width: 27.9vw;
+    }
 }
 
 .rsyp-content {
     display: flex;
     flex-direction: column;
-    gap: 64px;
     align-items: flex-start;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     flex: 1 1 100%;
-    padding-bottom: 100px;
+    padding-bottom: 44px;
     @include scrollbar(#343434);
+    padding-right: 6px;
 }
 
 .rsyp-popup__overlay {
@@ -43,17 +48,12 @@
     height: 100%;
 }
 
-.rsyp-popup__bottom,
-.rsyp-popup__top {
-    p:not(:last-child) {
-        margin-bottom: 16px;
-    }
-}
-
 .rsyp-popup__buttons {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
+    margin-top: 32px;
+    width: 100%;
 }
 
 .rsyp-popup__close {
@@ -104,4 +104,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.rsyp-title {
+    font-weight: 700;
+    margin-bottom: 22px;
+    @include responsive-font-size(20px, 24px, 1280px, 1920px);
+    color: #000;
+    padding-right: 48px;
+
+    @media screen and (min-width: 1921px) {
+        font-size: 30px;
+    }
+}
+
+.rsyp-text {
+    @include responsive-font-size(18px, 20px, 1280px, 1920px);
+
+    @media screen and (min-width: 1921px) {
+        font-size: 24px;
+    }
+}
+
+.rsyp-text {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.button-confirm {
+    @include responsive-font-size(20px, 24px, 1280px, 1920px);
+    padding: 12px 24px;
+}
+
+.link {
+    text-decoration: underline;
 }

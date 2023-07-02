@@ -28,6 +28,7 @@ const IndexPage = () => {
     const [data, setData] = useState<PersonData | null>(null);
     const [mediaQueryDevice] = useMediaQueryDeviceState();
     const [welcomeMessage, setWelcomeMessage] = useState('Приветствуем, \nна нашем сайте');
+    const [names, setNames] = useState('');
     const { isHelloVisible, end, setEnd } = usePlay();
     const [preloaderReady] = usePreloaderReadyState();
     const debouncedPreloaderReady = useDebounce(preloaderReady, 1000);
@@ -51,12 +52,13 @@ const IndexPage = () => {
     useEffect(() => {
         if (data && mediaQueryDevice) {
             setWelcomeMessage(data.welcome);
+            setNames(data.names);
         }
     }, [data, mediaQueryDevice]);
 
     return (
         <DefaultLayout>
-            <HelloHtml text={welcomeMessage} />
+            <HelloHtml text={welcomeMessage} names={names} />
 
             <motion.button
                 variants={{

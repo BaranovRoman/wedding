@@ -278,8 +278,13 @@ html {
     bottom: 35px;
     right: var(--offset-x);
     z-index: 1;
+
+    @include mobile {
+        width: calc(100vw - var(--offset-x) * 2);
+    }
 }
 
 .discover-button {
     margin-top: auto;
+    width: 100%;
 }

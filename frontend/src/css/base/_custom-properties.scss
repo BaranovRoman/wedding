@@ -10,6 +10,10 @@
             (var(--grid-gap) * ((var(--grid-columns) - 1) / var(--grid-columns)))
     );
 
+    @include mobile {
+        --offset-x: 16px;
+    }
+
     // Высота хедера
     --header-height: 94px;
 }

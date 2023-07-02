@@ -1,5 +1,4 @@
-import { Model } from '../Completed';
-// import { Model } from '../FinalReal';
+import { Model } from '../Rombich';
 import Hello from './Hello';
 import { useRef, useState, Suspense, useEffect } from 'react';
 import { WebGLRenderer } from 'three';
@@ -72,9 +71,7 @@ const Experience = () => {
                     <Hello speed={helloSpeed} />
                 </Suspense>
             )}
-            <Perf />
-            <Model />
-            {/* <Model opacity={sceneOpacity} /> */}
+            <Model opacity={sceneOpacity} />
             <Trees opacity={sceneOpacity} />
             {!isHelloVisible && <Sky sunPosition={[0, 1, 0]} distance={1300} inclination={0.6} azimuth={0.25} />}
             <ScrollControls

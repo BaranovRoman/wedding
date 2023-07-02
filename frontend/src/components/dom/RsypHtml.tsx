@@ -73,10 +73,10 @@ const RsypHtml = ({ data }: Props) => {
             <motion.div
                 variants={{
                     visible: {
-                        y: 0,
+                        opacity: 1,
                     },
                     hidden: {
-                        y: '100%',
+                        opacity: 0,
                     },
                 }}
                 animate={end ? 'visible' : 'hidden'}
@@ -95,18 +95,38 @@ const RsypHtml = ({ data }: Props) => {
                             <CrossSVG />
                         </div>
                     </button>
-                    <div className="rsyp-popup__top">
-                        <p>Мы хотим узнать, сможете ли вы присутствовать на нашей свадьбе. </p>
-                        <p>
-                            Ваше присутствие очень важно для нас, и мы хотели бы знать, будете ли вы рады быть с нами в
-                            этот особый день.
-                        </p>
-                        <p>Пожалуйста, дайте нам знать, придёте ли вы на нашу свадьбу.</p>
+                    <div className="rsyp-title">Уважаемые {data.names}</div>
+                    <div className="rsyp-text">
+                        <div>
+                            <p>Мы хотим узнать, сможете ли вы присутствовать на нашей свадьбе.</p>
+                            <p>
+                                Ваше присутствие очень важно для нас, и мы хотели бы знать, будете ли вы рады быть с
+                                нами в этот особый день.
+                            </p>
+                            <p>Пожалуйста, дайте нам знать, придёте ли вы на нашу свадьбу.</p>
+                        </div>
+
+                        <div>
+                            <p>Пожалуйста, дайте нам знать свой выбор. </p>
+                            <p>
+                                Если у тебя есть какие-либо вопросы или пожелания, не стесняйся{' '}
+                                <a href="https://t.me/ramzes2045" target="_blank" className="link">
+                                    обратиться к нам.
+                                </a>
+                            </p>
+                            <p>
+                                Мы надеемся, что ты сможешь присоединиться к нам и сделать наш день еще более особенным.
+                            </p>
+                        </div>
+                        <div>
+                            <p>С наилучшими пожеланиями,</p>
+                            <p>Роман и Кристина</p>
+                        </div>
                     </div>
                     <div className="rsyp-popup__buttons">
                         <button
                             type="button"
-                            className={classNames('button accept', {
+                            className={classNames('button accept button-confirm', {
                                 'is-done': accepted,
                                 'is-loading': isAcceptLoading,
                             })}
@@ -115,13 +135,11 @@ const RsypHtml = ({ data }: Props) => {
                                 fetchToSheet(data.accept_script_id, 'accept');
                             }}
                         >
-                            <div className="button__inner">
-                                Мы с радостью придём и будем рады разделить этот день с вами.
-                            </div>
+                            <div className="button__inner">Обязательно придем</div>
                         </button>
                         <button
                             type="button"
-                            className={classNames('button decline', {
+                            className={classNames('button decline button-confirm', {
                                 'is-done': declined,
                                 'is-loading': isDeclineLoading,
                             })}
@@ -130,15 +148,9 @@ const RsypHtml = ({ data }: Props) => {
                                 fetchToSheet(data.decline_script_id, 'decline');
                             }}
                         >
-                            <div className="button__inner">К сожалению, не сможем присутствовать на свадьбе.</div>
+                            <div className="button__inner">К сожалению, не сможем присутствовать</div>
                         </button>
                         {error !== '' && <p>{error}</p>}
-                    </div>
-                    <div className="rsyp-popup__bottom">
-                        <p>Пожалуйста, дай нам знать свой выбор. </p>
-                        <p>Если у тебя есть какие-либо вопросы или пожелания, не стесняйся обратиться к нам. </p>
-                        <p>Мы надеемся, что ты сможешь присоединиться к нам и сделать наш день еще более особенным. </p>
-                        <p>С наилучшими пожеланиями, Роман и Кристина</p>
                     </div>
                 </div>
             </motion.div>

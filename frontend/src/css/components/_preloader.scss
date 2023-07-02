@@ -31,6 +31,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @include tablet {
+        padding-inline: var(--offset-x);
+    }
 }
 
 .ram-inner,
@@ -47,11 +51,31 @@
 .ram {
     --width: 640px;
     --height: 360px;
+
+    @include laptop {
+        --width: 30vw;
+        --height: auto;
+    }
+
+    @include vertical-tablet {
+        --width: 60vw;
+        --height: auto;
+    }
 }
 
 .squirell {
     --width: 560px;
     --height: 420px;
+
+    @include laptop {
+        --width: 30vw;
+        --height: auto;
+    }
+
+    @include vertical-tablet {
+        --width: 60vw;
+        --height: auto;
+    }
 }
 
 .ram,
@@ -73,6 +97,11 @@
     justify-content: space-around;
     margin-top: auto;
     margin-bottom: auto;
+
+    @include vertical-tablet {
+        flex-direction: column;
+        gap: 16px;
+    }
 }
 
 .preloader-bottom {

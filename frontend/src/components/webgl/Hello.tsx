@@ -68,7 +68,7 @@ const Hello = ({ count = 100, depth = 50, speed }: Props) => {
     return (
         <>
             {[...Array(count)].map((_, i) => {
-                return <Ring key={i} z={-(i / count) * depth - 20} speed={speed} />;
+                return <Ring key={i} z={-(i / count) * depth - 20} speed={speed} material-envMapIntensity={130} />;
             })}
 
             <EffectComposer>

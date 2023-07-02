@@ -92,6 +92,12 @@
     #{$prop}: calc(var(--grid-column-width) * #{$num} + var(--grid-gap) * #{$num});
 }
 
+@mixin laptop() {
+    @media screen and (max-width: 1799px) {
+        @content;
+    }
+}
+
 @mixin tablet() {
     @media screen and (max-width: 1199px) {
         @content;

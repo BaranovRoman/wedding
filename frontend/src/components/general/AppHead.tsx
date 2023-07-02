@@ -27,7 +27,7 @@ const AppHead = ({ host = '' }: Props) => {
             <meta name="twitter:image" content={WEBSITE_OG_IMAGE} />
             <meta name="twitter:title" content={WEBSITE_NAME} />
             <meta name="twitter:description" content={WEBSITE_DESCRIPTION} />
-            <link rel="icon" href="/img/favicon/favicon.ico" />
+            <link rel="icon" href="/img/favicon/favicon.png" />
             <link
                 rel="preload"
                 href="/fonts/Cormorant-Regular.woff2"
