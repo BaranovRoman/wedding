@@ -7,11 +7,14 @@
 import { ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import { TransitionProvider } from '@/contexts/page-transition';
+import { PlayProvider } from '@/contexts/play';
 
 const Providers = ({ children }: { children: ReactNode }) => {
     return (
         <RecoilRoot>
-            <TransitionProvider>{children}</TransitionProvider>
+            <TransitionProvider>
+                <PlayProvider>{children}</PlayProvider>
+            </TransitionProvider>
         </RecoilRoot>
     );
 };

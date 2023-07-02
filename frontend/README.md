@@ -6,3 +6,6 @@ npx gltfjsx public/model/export.gltf -o ./src/components/export-transformed.jsx 
 
 Создаёт много разметки, но не теряет лепестки
 npx gltfjsx public/model/WeddingNew.glb -o ./src/components/WeddingNew.tsx -t -k -K -s -d
+
+Не теряет лепестки + делает всё правильно
+npx gltfjsx@6.2.3 public/model/VrodeOno.glb -o ./src/components/VrodeOnoText.tsx -t -T -s -j

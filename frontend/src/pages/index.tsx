@@ -8,9 +8,19 @@ import { Canvas } from '@react-three/fiber';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { guestData } from '@/data';
-import WebGL from '@/components/webgl/WebGL/WebGL';
+import WebGL from '@/components/webgl/WebGL';
 import { useMediaQueryDeviceState } from '@/atoms/media-query-device';
 import HelloHtml from '@/components/dom/HelloHtml';
+import { usePlay } from '@/contexts/play';
+import { motion } from 'framer-motion';
+import RsypHtml from '@/components/dom/RsypHtml';
+import { Loader } from '@react-three/drei';
+
+import PreloaderHtml from '@/components/dom/PreloaderHtml';
+import { usePreloaderReadyState } from '@/atoms/preloader-ready';
+import { useDebounce } from '@/hooks/use-debounce';
+import classNames from 'classnames';
+import WebGLWithGPUCheck from '@/components/webgl/WebGLWithGPUCheck';
 
 const IndexPage = () => {
     const { asPath } = useRouter();
@@ -18,6 +28,9 @@ const IndexPage = () => {
     const [data, setData] = useState<PersonData | null>(null);
     const [mediaQueryDevice] = useMediaQueryDeviceState();
     const [welcomeMessage, setWelcomeMessage] = useState('Приветствуем, \nна нашем сайте');
+    const { isHelloVisible, end, setEnd } = usePlay();
+    const [preloaderReady] = usePreloaderReadyState();
+    const debouncedPreloaderReady = useDebounce(preloaderReady, 1000);
 
     useEffect(() => {
         setHash((asPath as string).split('#')[1]);
@@ -37,54 +50,37 @@ const IndexPage = () => {
 
     useEffect(() => {
         if (data && mediaQueryDevice) {
-            setWelcomeMessage(mediaQueryDevice !== 'desktop' ? data.welcome_mobile : data.welcome);
+            setWelcomeMessage(data.welcome);
         }
     }, [data, mediaQueryDevice]);
 
-    const fetchToSheet = (script_id: string) => {
-        axios
-            .get(`https://script.google.com/macros/s/${script_id}/exec`)
-            .then(function (response) {
-                console.log('Запрос успешно выполнен');
-            })
-            .catch(function (error) {
-                console.log('Произошла ошибка');
-            });
-    };
-
     return (
         <DefaultLayout>
-            <div className="wrapper">
-                <div className="canvas-wrapper">
-                    {/* {data && (
-                        <div className="banner">
-                            <h1>
-                                Приветствуем, {data.names} - сообщение для вас - {data.welcome}
-                            </h1>
-                            <button
-                                type="button"
-                                className="button accept"
-                                onClick={() => {
-                                    fetchToSheet(data.accept_script_id);
-                                }}
-                            >
-                                Подтвердить участие
-                            </button>
-                            <button
-                                type="button"
-                                className="button decline"
-                                onClick={() => {
-                                    fetchToSheet(data.decline_script_id);
-                                }}
-                            >
-                                Отклонить участие
-                            </button>
-                        </div>
-                    )} */}
-                    <HelloHtml />
-                    <WebGL helloText={welcomeMessage} />
-                </div>
-            </div>
+            <HelloHtml text={welcomeMessage} />
+
+            <motion.button
+                variants={{
+                    visible: {
+                        opacity: 1,
+                        pointerEvents: 'auto',
+                    },
+                    hidden: {
+                        opacity: 0,
+                        pointerEvents: 'none',
+                    },
+                }}
+                animate={!isHelloVisible && !end ? 'visible' : 'hidden'}
+                className="button rsyp"
+                onClick={() => {
+                    setEnd(true);
+                }}
+            >
+                <div className="button__inner">Подтвердить участие</div>
+            </motion.button>
+            {data && <RsypHtml data={data} />}
+            <WebGLWithGPUCheck />
+            <PreloaderHtml />
+            {/* {!debouncedPreloaderReady && <PreloaderHtml />} */}
         </DefaultLayout>
     );
 };

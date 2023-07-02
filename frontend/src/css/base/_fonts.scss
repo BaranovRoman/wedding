@@ -40,3 +40,5 @@
 /* stylelint-enable */
 
 @include font-face(Cormorant, '/fonts/Cormorant-Regular', null, null, woff2);
+@include font-face(Cormorant, '/fonts/Cormorant-Medium', 500, null, woff2);
+@include font-face(Cormorant, '/fonts/Cormorant-SemiBold', 600, null, woff2);

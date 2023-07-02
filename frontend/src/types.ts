@@ -19,7 +19,6 @@ export type PersonData = {
     hash: string;
     names: string;
     welcome: string;
-    welcome_mobile: string;
     accept_script_id: string;
     decline_script_id: string;
 };
