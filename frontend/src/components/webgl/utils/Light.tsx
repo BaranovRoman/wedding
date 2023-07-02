@@ -30,18 +30,37 @@ const Light = () => {
     //     aColor: '#aeffaf',
     // });
 
+    const { aIntensity, aColor } = useControls('ambient', {
+        aIntensity: 0.11,
+        aColor: '#aeffaf',
+    });
+
+    const { dX, dY, dZ, dlIntensity, dColor } = useControls('directional', {
+        dX: 30,
+        dY: 50,
+        dZ: 60,
+        dlIntensity: 0.62,
+        dColor: '#ffffff',
+    });
+
+    const { hColorOne, hColorTwo, hIntensity } = useControls('hemisphere', {
+        hColorOne: '#b6e8b1',
+        hColorTwo: '#8382e2',
+        hIntensity: 0.12,
+    });
+
     return (
         <>
-            <hemisphereLight args={['#b6e8b1', '#8382e2', 0.12]} />
-            <ambientLight intensity={0.11} color="#aeffaf" />
+            <hemisphereLight args={[hColorOne, hColorTwo, hIntensity]} />
+            <ambientLight intensity={aIntensity} color={aColor} />
             <Float>
                 <directionalLight
                     // @ts-ignore
                     ref={lightRef}
-                    position={[30, 50, 60]}
-                    intensity={0.62}
+                    position={[dX, dY, dZ]}
+                    intensity={dlIntensity}
                     castShadow
-                    color="#ffffff"
+                    color={dColor}
                     shadow-mapSize-height={gpuState && isItGoodGPU(gpuState) ? 4096 : 2048}
                     shadow-mapSize-width={gpuState && isItGoodGPU(gpuState) ? 4096 : 2048}
                     shadow-camera-near={0.001}
