@@ -95,7 +95,9 @@ const RsypHtml = ({ data }: Props) => {
                             <CrossSVG />
                         </div>
                     </button>
-                    <div className="rsyp-title">Уважаемые {data.names}</div>
+                    <div className="rsyp-title">
+                        {data.pair ? 'Уважаемые' : data.pron} {data.names}
+                    </div>
                     <div className="rsyp-text">
                         <div>
                             <p>Мы хотим узнать, сможете ли вы присутствовать на нашей свадьбе.</p>

@@ -7,9 +7,11 @@ import { useDebounce } from '@/hooks/use-debounce';
 type Props = {
     text?: string;
     names?: string;
+    pair: boolean;
+    pron?: string;
 };
 
-const HelloHtml = ({ text, names }: Props) => {
+const HelloHtml = ({ text, names, pair, pron }: Props) => {
     const { play, setPlay } = usePlay();
     const [preloaderReady] = usePreloaderReadyState();
     const debouncedPreloaderReady = useDebounce(preloaderReady, 200);
@@ -26,7 +28,11 @@ const HelloHtml = ({ text, names }: Props) => {
                     <div>Красноярск, Дрокино парк</div>
                 </div>
                 <div className="hello-layout__content hello-item">
-                    {names !== '' && <div className="hello-hello">Дорогие {names}!</div>}
+                    {names !== '' && (
+                        <div className="hello-hello">
+                            {pair ? 'Дорогие' : pron} {names}!
+                        </div>
+                    )}
                     <div className="hello-layout__message">
                         {text && (
                             <div className="hello-layout__personal" dangerouslySetInnerHTML={{ __html: text }}></div>

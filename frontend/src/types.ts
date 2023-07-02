@@ -21,6 +21,8 @@ export type PersonData = {
     welcome: string;
     accept_script_id: string;
     decline_script_id: string;
+    pair: boolean;
+    pron?: string;
 };
 
 export type Vector = { x: number; y: number; z: number };
