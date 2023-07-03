@@ -43,7 +43,7 @@ export function TreeFour({ sceneOpacity, ...props }: Props) {
         <group {...props} dispose={null}>
             <mesh
                 castShadow
-                receiveShadow
+                // receiveShadow
                 geometry={nodes._4_tree__4_tree_0.geometry}
                 material={materials['4_tree']}
                 position={[-0.182, -0.012, 0.024]}

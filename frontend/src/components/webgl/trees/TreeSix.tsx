@@ -44,7 +44,7 @@ export function TreeSix({ sceneOpacity, ...props }: Props) {
         <group {...props} dispose={null}>
             <mesh
                 castShadow
-                receiveShadow
+                // receiveShadow
                 geometry={nodes._6_tree__6_tree_0.geometry}
                 material={materials['6_tree']}
                 position={[2.567, -0.023, 0.034]}

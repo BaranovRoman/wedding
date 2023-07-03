@@ -44,7 +44,7 @@ export function TreeOne({ sceneOpacity, ...props }: Props) {
         <group {...props} dispose={null}>
             <mesh
                 castShadow
-                receiveShadow
+                // receiveShadow
                 geometry={nodes._3_tree__3_tree_0.geometry}
                 material={materials['3_tree']}
                 position={[-1.339, -0.012, 0.024]}

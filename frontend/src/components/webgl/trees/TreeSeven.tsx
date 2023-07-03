@@ -44,7 +44,7 @@ export function TreeSeven({ sceneOpacity, ...props }: Props) {
         <group {...props} dispose={null}>
             <mesh
                 castShadow
-                receiveShadow
+                // receiveShadow
                 geometry={nodes._7_tree__7_tree_0.geometry}
                 material={materials['7_tree']}
                 position={[4.038, -0.012, 0.024]}
