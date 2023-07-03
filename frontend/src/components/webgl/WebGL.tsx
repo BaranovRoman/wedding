@@ -31,6 +31,7 @@ import classNames from 'classnames';
 import { TierResult } from 'detect-gpu';
 import { useGpuState } from '@/atoms/gpu';
 import round from 'lodash.round';
+import { useMediaQueryDeviceState } from '@/atoms/media-query-device';
 
 const shouldUseAntialiasing = ({ isMobile, fps, tier, gpu }: TierResult) => {
     if (isMobile || tier < 3 || gpu === 'intel hd graphics 620' || (typeof fps === 'number' ? fps < 40 : true)) {
@@ -44,6 +45,7 @@ const WebGL = () => {
     const { play } = usePlay();
     const [dpr, setDpr] = useState(Math.min(devicePixelRatio, 1.25));
     const [gpuState] = useGpuState();
+    const [mediaQueryDevice] = useMediaQueryDeviceState();
     return (
         <div
             className={classNames('canvas-wrapper', {
@@ -61,7 +63,7 @@ const WebGL = () => {
                 dpr={dpr}
                 camera={{
                     position: [0, 0, 4],
-                    fov: 30,
+                    fov: mediaQueryDevice === 'vertical-mobile' ? 40 : 30,
                     near: 0.01,
                     far: 110,
                 }}

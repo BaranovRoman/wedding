@@ -105,12 +105,12 @@ export function Model({ opacity, ...props }: Props) {
             />
             <mesh
                 castShadow
-                receiveShadow
+                // receiveShadow
                 geometry={nodes.Malbert001.geometry}
                 material={materials.Malbert_0}
                 position={[1.104, 0.854, -6.119]}
                 scale={0.01}
-                material-envMapIntensity={0.3}
+                material-envMapIntensity={0.5}
             />
             <mesh
                 castShadow
