@@ -63,7 +63,7 @@ const WebGL = () => {
                 dpr={dpr}
                 camera={{
                     position: [0, 0, 4],
-                    fov: mediaQueryDevice === 'vertical-mobile' ? 40 : 30,
+                    fov: mediaQueryDevice === 'vertical-mobile' ? 25 : 30,
                     near: 0.01,
                     far: 110,
                 }}
