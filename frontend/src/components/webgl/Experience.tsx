@@ -73,7 +73,7 @@ const Experience = () => {
             )}
             <Model opacity={sceneOpacity} />
             <Trees opacity={sceneOpacity} />
-            {!isHelloVisible && <Sky sunPosition={[0, 1, 0]} distance={1300} inclination={0.6} azimuth={0.25} />}
+            {!isHelloVisible && <Sky sunPosition={[30, 50, 60]} distance={1300} inclination={0.6} azimuth={0.25} />}
             <ScrollControls
                 pages={play && !isHelloVisible ? totalScreens : 0}
                 damping={0.5}
