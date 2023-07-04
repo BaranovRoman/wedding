@@ -21,8 +21,8 @@ const AppInits = () => {
     }, [scrollLocked]);
 
     useEffect(() => {
-        setIsDayState(true);
-        // setIsDayState(new Date().getHours() > 22 && new Date().getHours() < 6);
+        // setIsDayState(true);
+        setIsDayState(new Date().getHours() > 22 && new Date().getHours() < 6);
     }, [setIsDayState]);
 
     useEffect(() => {
