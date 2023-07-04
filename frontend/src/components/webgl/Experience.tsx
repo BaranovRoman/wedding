@@ -4,7 +4,8 @@ import { useRef, useState, Suspense, useEffect } from 'react';
 import { WebGLRenderer } from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { camerasData } from '../../data';
-import { useScrollControlsState } from '../../atoms/scroll-controls';
+import { useScrollControlsState } from '@/atoms/scroll-controls';
+import { useIsDayState } from '@/atoms/is-day';
 import {
     // OrbitControls,
     PerformanceMonitor,
@@ -13,9 +14,11 @@ import {
     Stats,
     Preload,
     Environment,
+    SoftShadows,
+    Float,
 } from '@react-three/drei';
 
-import { useGLTF, Sphere, PerspectiveCamera, useScroll } from '@react-three/drei';
+import { useGLTF, Sphere, PerspectiveCamera, useScroll, Stars } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
 
@@ -35,6 +38,7 @@ import { useControls } from 'leva';
 const Experience = () => {
     const totalScreens = Object.keys(camerasData).length - 1;
     const [scrollEnabled] = useScrollControlsState();
+    const [isDayState] = useIsDayState();
     const { play, setHasScroll, end, setEnd, isHelloVisible, setIsHelloVisible } = usePlay();
     const sceneOpacity = useRef(0);
     const helloSpeed = useRef(1);
@@ -73,7 +77,14 @@ const Experience = () => {
             )}
             <Model opacity={sceneOpacity} />
             <Trees opacity={sceneOpacity} />
-            {!isHelloVisible && <Sky sunPosition={[0, 1, 0]} distance={1300} inclination={0.6} azimuth={0.25} />}
+            {!isHelloVisible && !isDayState && (
+                <Float speed={2} floatIntensity={0.1} rotationIntensity={0.05}>
+                    <Stars radius={20} depth={15} count={5000} factor={4} saturation={0} fade speed={2} />
+                </Float>
+            )}
+            {!isHelloVisible && isDayState && (
+                <Sky sunPosition={[0, 0.1, 0]} distance={1300} inclination={0.6} azimuth={0.25} />
+            )}
             <ScrollControls
                 pages={play && !isHelloVisible ? totalScreens : 0}
                 damping={0.5}

@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useMediaQueryDeviceState } from '@/atoms/media-query-device';
 import { useScrollLockState } from '@/atoms/scroll-lock';
+import { useIsDayState } from '@/atoms/is-day';
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/dom';
 
 const AppInits = () => {
     const [_, setMediaQueryDeviceState] = useMediaQueryDeviceState();
     const [scrollLocked] = useScrollLockState();
+    const [isDayState, setIsDayState] = useIsDayState();
 
     /**
      * Блокирование скролла страницы
@@ -17,6 +19,11 @@ const AppInits = () => {
             unlockBodyScroll();
         }
     }, [scrollLocked]);
+
+    useEffect(() => {
+        setIsDayState(true);
+        // setIsDayState(new Date().getHours() > 22 && new Date().getHours() < 6);
+    }, [setIsDayState]);
 
     useEffect(() => {
         const setDevice = () => {

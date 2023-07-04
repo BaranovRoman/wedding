@@ -8,6 +8,7 @@ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import gsap from 'gsap';
+import { useControls } from 'leva';
 
 interface Props {
     count?: number;
@@ -42,6 +43,11 @@ const Ring = ({ z, speed }: RingProps) => {
         rZ: Math.random() * Math.PI,
     });
 
+    const intensity = 1.8;
+    // const { intensity } = useControls('rings', {
+    //     intensity: 2.5,
+    // });
+
     useFrame((state) => {
         if (ref.current) {
             ref.current.rotation.set((data.rX += 0.001), (data.rY += 0.001), (data.rZ += 0.001));
@@ -59,7 +65,7 @@ const Ring = ({ z, speed }: RingProps) => {
             material={materials.Mat}
             scale={880.581}
             transparent
-            material-envMapIntensity={2.5}
+            material-envMapIntensity={intensity}
         />
     );
 };

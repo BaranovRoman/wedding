@@ -8,6 +8,7 @@ import React, { useRef, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { useFrame } from '@react-three/fiber';
+import { useControls } from 'leva';
 
 type GLTFResult = GLTF & {
     nodes: {
@@ -40,6 +41,12 @@ export function TreeSix({ sceneOpacity, ...props }: Props) {
         }
     });
 
+    // const { intensity } = useControls('treesix', {
+    //     intensity: 2.5,
+    // });
+
+    const intensity = 1.5;
+
     return (
         <group {...props} dispose={null}>
             <mesh
@@ -50,6 +57,7 @@ export function TreeSix({ sceneOpacity, ...props }: Props) {
                 position={[2.567, -0.023, 0.034]}
                 rotation={[-Math.PI / 2, 0, 0]}
                 scale={0.135}
+                material-envMapIntensity={intensity}
             />
         </group>
     );

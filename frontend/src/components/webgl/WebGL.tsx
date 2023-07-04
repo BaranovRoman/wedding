@@ -14,11 +14,13 @@ import {
     Preload,
     Loader,
     Environment,
+    ContactShadows,
 } from '@react-three/drei';
 
 import { useGLTF, Sphere, PerspectiveCamera, useScroll } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 import { usePlay } from '@/contexts/play';
 

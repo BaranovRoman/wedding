@@ -8,6 +8,8 @@ import React, { useMemo } from 'react';
 import { useGLTF, Float } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { GLTF } from 'three-stdlib';
+import { useControls } from 'leva';
+import { useIsDayState } from '@/atoms/is-day';
 
 type GLTFResult = GLTF & {
     nodes: {
@@ -46,6 +48,19 @@ type Props = {
 
 export function Model({ opacity, ...props }: Props) {
     const { nodes, materials } = useGLTF('/model/Rombich-transformed.glb') as GLTFResult;
+    const [isDayState] = useIsDayState();
+
+    // const { intensity, lowIntensity, lowestIntensity, highIntensity } = useControls('model', {
+    //     intensity: { value: 1, min: 0.1, max: 6, step: 0.1 },
+    //     lowIntensity: { value: 0.5, min: 0.1, max: 6, step: 0.1 },
+    //     lowestIntensity: { value: 0.25, min: 0.1, max: 6, step: 0.1 },
+    //     highIntensity: { value: 6, min: 0.1, max: 6, step: 0.1 },
+    // });
+
+    const intensity = isDayState ? 1.2 : 0.9;
+    const lowIntensity = isDayState ? 0.75 : 1;
+    const lowestIntensity = isDayState ? 1 : 1;
+    const highIntensity = isDayState ? 6 : 6;
 
     useMemo(() => {
         Object.values(materials).forEach((material) => {
@@ -71,9 +86,17 @@ export function Model({ opacity, ...props }: Props) {
                 material={materials.DrokinoHomes}
                 position={[-0.821, 0.649, -8.849]}
                 scale={0.01}
-                material-envMapIntensity={0.5}
+                material-envMapIntensity={lowIntensity}
+                // material-envMapIntensity={0.5}
             />
-            <mesh castShadow receiveShadow geometry={nodes.Floor001.geometry} material={materials.Floor} scale={0.01} />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Floor001.geometry}
+                material={materials.Floor}
+                scale={0.01}
+                material-envMapIntensity={intensity}
+            />
 
             <Float speed={2} floatIntensity={0.2} rotationIntensity={0.12}>
                 <mesh
@@ -83,6 +106,7 @@ export function Model({ opacity, ...props }: Props) {
                     material={materials.Flowers}
                     position={[-0.932, 0.511, -0.35]}
                     scale={0.01}
+                    material-envMapIntensity={intensity}
                 />
             </Float>
 
@@ -93,7 +117,8 @@ export function Model({ opacity, ...props }: Props) {
                 material={materials.Picture}
                 position={[0.753, 1.522, -1.162]}
                 scale={0.01}
-                material-envMapIntensity={6}
+                material-envMapIntensity={highIntensity}
+                // material-envMapIntensity={6}
             />
             <mesh
                 castShadow
@@ -102,6 +127,7 @@ export function Model({ opacity, ...props }: Props) {
                 material={materials.MainStage}
                 position={[1.104, 0.854, -6.119]}
                 scale={0.01}
+                material-envMapIntensity={intensity}
             />
             <mesh
                 castShadow
@@ -110,7 +136,8 @@ export function Model({ opacity, ...props }: Props) {
                 material={materials.Malbert_0}
                 position={[1.104, 0.854, -6.119]}
                 scale={0.01}
-                material-envMapIntensity={0.5}
+                material-envMapIntensity={lowIntensity}
+                // material-envMapIntensity={0.5}
             />
             <mesh
                 castShadow
@@ -119,7 +146,8 @@ export function Model({ opacity, ...props }: Props) {
                 material={materials.Polaroid1}
                 position={[0.01, 0.093, 5.355]}
                 scale={0.01}
-                material-envMapIntensity={0.25}
+                material-envMapIntensity={lowestIntensity}
+                // material-envMapIntensity={0.25}
             />
             <Float speed={2} floatIntensity={0.2} rotationIntensity={0.12}>
                 <mesh
@@ -129,6 +157,7 @@ export function Model({ opacity, ...props }: Props) {
                     material={materials.GreenDark}
                     position={[-0.382, 0.561, 0.004]}
                     scale={0.01}
+                    material-envMapIntensity={intensity}
                 />
             </Float>
             <Float speed={2} floatIntensity={0.2} rotationIntensity={0.12}>
@@ -139,6 +168,7 @@ export function Model({ opacity, ...props }: Props) {
                     material={materials.BlueGreen}
                     position={[-0.186, 0.507, 0.159]}
                     scale={0.01}
+                    material-envMapIntensity={intensity}
                 />
             </Float>
             <mesh
@@ -148,6 +178,7 @@ export function Model({ opacity, ...props }: Props) {
                 material={materials.Mat}
                 position={[-0.068, 0.465, -0.778]}
                 scale={0.01}
+                material-envMapIntensity={intensity}
             />
 
             <Float speed={2} floatIntensity={0.2} rotationIntensity={0.12}>
@@ -158,6 +189,7 @@ export function Model({ opacity, ...props }: Props) {
                     material={materials.Orange}
                     position={[0.418, 0.606, 0.425]}
                     scale={0.01}
+                    material-envMapIntensity={intensity}
                 />
             </Float>
             <Float speed={2} floatIntensity={0.2} rotationIntensity={0.12}>
@@ -168,6 +200,7 @@ export function Model({ opacity, ...props }: Props) {
                     material={materials.Red}
                     position={[0.188, 0.466, -0.735]}
                     scale={0.01}
+                    material-envMapIntensity={intensity}
                 />
             </Float>
         </group>

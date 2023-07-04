@@ -7,6 +7,7 @@ import React, { useRef, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { useFrame } from '@react-three/fiber';
+import { useControls } from 'leva';
 
 type GLTFResult = GLTF & {
     nodes: {
@@ -39,6 +40,12 @@ export function TreeFour({ sceneOpacity, ...props }: Props) {
         }
     });
 
+    // const { intensity } = useControls('treefour', {
+    //     intensity: 2.5,
+    // });
+
+    const intensity = 1.5;
+
     return (
         <group {...props} dispose={null}>
             <mesh
@@ -49,6 +56,7 @@ export function TreeFour({ sceneOpacity, ...props }: Props) {
                 position={[-0.182, -0.012, 0.024]}
                 rotation={[2.586, -1.382, -2.872]}
                 scale={[0.077, 0.144, 0.047]}
+                material-envMapIntensity={intensity}
             />
         </group>
     );
