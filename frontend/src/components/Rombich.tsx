@@ -153,6 +153,7 @@ export function Model({ opacity, ...props }: Props) {
             <mesh
                 // castShadow
                 // receiveShadow
+                // @ts-ignore
                 ref={drokinoEl}
                 geometry={nodes.Drokino001.geometry}
                 material={materials.DrokinoHomes}
