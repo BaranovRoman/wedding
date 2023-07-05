@@ -4,12 +4,14 @@ Command: npx gltfjsx@6.2.3 public/model/Rombich.glb -o ./src/components/Rombich.
 */
 
 import * as THREE from 'three';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useGLTF, Float } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { GLTF } from 'three-stdlib';
 import { useControls } from 'leva';
 import { useIsDayState } from '@/atoms/is-day';
+import { gsap } from 'gsap';
+import { useScreensState } from '@/atoms/screens';
 
 type GLTFResult = GLTF & {
     nodes: {
@@ -49,6 +51,75 @@ type Props = {
 export function Model({ opacity, ...props }: Props) {
     const { nodes, materials } = useGLTF('/model/Rombich-transformed.glb') as GLTFResult;
     const [isDayState] = useIsDayState();
+    const [screensState] = useScreensState();
+    const [isDrokinoHovered, setIsDrokinoHovered] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const drokinoEl = useRef<THREE.Mesh>();
+
+    useEffect(() => {
+        if (drokinoEl.current) {
+            if (isDrokinoHovered && !isAnimating) {
+                setIsAnimating(true);
+                gsap.timeline({
+                    onComplete: () => {
+                        setIsAnimating(false);
+                    },
+                })
+                    .to(
+                        drokinoEl.current.rotation,
+                        {
+                            y: -Math.PI / 4,
+                            ease: 'power4.out',
+                            duration: 2,
+                        },
+                        0,
+                    )
+                    .to(
+                        drokinoEl.current.scale,
+                        {
+                            y: 0.0125,
+                            ease: 'power4.out',
+                            duration: 2,
+                        },
+                        0,
+                    );
+            }
+
+            if (!isDrokinoHovered && !isAnimating) {
+                gsap.timeline({
+                    onComplete: () => {
+                        setIsAnimating(false);
+                    },
+                })
+                    .to(
+                        drokinoEl.current.rotation,
+                        {
+                            y: 0,
+                            ease: 'power4.out',
+                            duration: 2,
+                        },
+                        0,
+                    )
+                    .to(
+                        drokinoEl.current.scale,
+                        {
+                            y: 0.01,
+                            ease: 'power4.out',
+                            duration: 2,
+                        },
+                        0,
+                    );
+            }
+        }
+    }, [isDrokinoHovered, isAnimating]);
+
+    useEffect(() => {
+        document.documentElement.style.cursor = isDrokinoHovered ? 'pointer' : 'default';
+
+        return () => {
+            document.documentElement.style.cursor = 'default';
+        };
+    }, [isDrokinoHovered]);
 
     // const { intensity, lowIntensity, lowestIntensity, highIntensity } = useControls('model', {
     //     intensity: { value: 1, min: 0.1, max: 6, step: 0.1 },
@@ -82,11 +153,48 @@ export function Model({ opacity, ...props }: Props) {
             <mesh
                 // castShadow
                 // receiveShadow
+                ref={drokinoEl}
                 geometry={nodes.Drokino001.geometry}
                 material={materials.DrokinoHomes}
                 position={[-0.821, 0.649, -8.849]}
                 scale={0.01}
                 material-envMapIntensity={lowIntensity}
+                onPointerEnter={(obj) => {
+                    if (screensState === 9 || screensState === 8) {
+                        setIsDrokinoHovered(true);
+                        // gsap.to(obj.eventObject.rotation, {
+                        //     y: -Math.PI / 4,
+                        //     ease: 'expo.out',
+                        //     duration: 1.5,
+                        //     onComplete: () => {
+                        //         setIsAnimating(false);
+                        //     },
+                        // });
+                    }
+                }}
+                onPointerLeave={(obj) => {
+                    // if (isAnimating) {
+                    //     setTimeout(() => {
+                    //         gsap.to(obj.eventObject.rotation, {
+                    //             y: 0,
+                    //             ease: 'expo.out',
+                    //             duration: 1.5,
+                    //         });
+                    //     }, 1500);
+                    // } else {
+                    //     if (screensState === 9 || screensState === 8) {
+                    //         gsap.to(obj.eventObject.rotation, {
+                    //             y: 0,
+                    //             ease: 'expo.out',
+                    //             duration: 1.5,
+                    //         });
+                    //     }
+                    // }
+                    setIsDrokinoHovered(false);
+                }}
+                onClick={() => {
+                    window.open('https://go.2gis.com/g1i2j', '_blank');
+                }}
                 // material-envMapIntensity={0.5}
             />
             <mesh
