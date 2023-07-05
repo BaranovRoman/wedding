@@ -22,7 +22,7 @@ const AppInits = () => {
 
     useEffect(() => {
         // setIsDayState(true);
-        setIsDayState(new Date().getHours() > 22 && new Date().getHours() < 6);
+        setIsDayState(new Date().getHours() < 22 && new Date().getHours() > 6);
     }, [setIsDayState]);
 
     useEffect(() => {
