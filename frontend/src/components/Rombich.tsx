@@ -162,34 +162,9 @@ export function Model({ opacity, ...props }: Props) {
                 onPointerEnter={(obj) => {
                     if (screensState === 9 || screensState === 8) {
                         setIsDrokinoHovered(true);
-                        // gsap.to(obj.eventObject.rotation, {
-                        //     y: -Math.PI / 4,
-                        //     ease: 'expo.out',
-                        //     duration: 1.5,
-                        //     onComplete: () => {
-                        //         setIsAnimating(false);
-                        //     },
-                        // });
                     }
                 }}
                 onPointerLeave={(obj) => {
-                    // if (isAnimating) {
-                    //     setTimeout(() => {
-                    //         gsap.to(obj.eventObject.rotation, {
-                    //             y: 0,
-                    //             ease: 'expo.out',
-                    //             duration: 1.5,
-                    //         });
-                    //     }, 1500);
-                    // } else {
-                    //     if (screensState === 9 || screensState === 8) {
-                    //         gsap.to(obj.eventObject.rotation, {
-                    //             y: 0,
-                    //             ease: 'expo.out',
-                    //             duration: 1.5,
-                    //         });
-                    //     }
-                    // }
                     setIsDrokinoHovered(false);
                 }}
                 onClick={() => {

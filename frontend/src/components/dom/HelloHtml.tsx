@@ -25,7 +25,9 @@ const HelloHtml = ({ text, names, pair, pron }: Props) => {
             <div className="hello-layout__inner">
                 <div className="hello-layout__top hello-item">
                     <div>4 августа</div>
-                    <div>Красноярск, Дрокино парк</div>
+                    <a href="https://go.2gis.com/g1i2j" target="_blank">
+                        Красноярск, Дрокино парк, Рестоклуб
+                    </a>
                 </div>
                 <div className="hello-layout__content hello-item">
                     {names !== '' && (

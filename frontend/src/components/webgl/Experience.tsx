@@ -6,6 +6,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { camerasData } from '../../data';
 import { useScrollControlsState } from '@/atoms/scroll-controls';
 import { useIsDayState } from '@/atoms/is-day';
+import { mediaQueryDeviceState, useMediaQueryDeviceState } from '@/atoms/media-query-device';
 import {
     // OrbitControls,
     PerformanceMonitor,
@@ -39,6 +40,7 @@ const Experience = () => {
     const totalScreens = Object.keys(camerasData).length - 1;
     const [scrollEnabled] = useScrollControlsState();
     const [isDayState] = useIsDayState();
+    const [mediaQueryDeviceState] = useMediaQueryDeviceState();
     const { play, setHasScroll, end, setEnd, isHelloVisible, setIsHelloVisible } = usePlay();
     const sceneOpacity = useRef(0);
     const helloSpeed = useRef(1);
@@ -71,8 +73,8 @@ const Experience = () => {
     return (
         <>
             {isHelloVisible && (
-                <Suspense fallback={null}>
-                    <Hello speed={helloSpeed} />
+                <Suspense>
+                    <Hello speed={helloSpeed} count={mediaQueryDeviceState === 'desktop' ? 100 : 25} />
                 </Suspense>
             )}
             <Model opacity={sceneOpacity} />
