@@ -2,7 +2,7 @@
 
 import { WebGLRenderer } from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useRef, useState, Suspense } from 'react';
+import { useRef, useState, Suspense, TouchEvent } from 'react';
 import { camerasData } from '../../data';
 import { useScrollControlsState } from '../../atoms/scroll-controls';
 import {
@@ -15,9 +15,9 @@ import {
     Loader,
     Environment,
     ContactShadows,
+    useScroll,
 } from '@react-three/drei';
 
-import { useGLTF, Sphere, PerspectiveCamera, useScroll } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import * as THREE from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
@@ -48,6 +48,31 @@ const WebGL = () => {
     const [dpr, setDpr] = useState(Math.min(devicePixelRatio, 1.25));
     const [gpuState] = useGpuState();
     const [mediaQueryDevice] = useMediaQueryDeviceState();
+
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
+
+    const scroll = useScroll();
+
+    function handleTouchStart(event: TouchEvent) {
+        setTouchStart(event.targetTouches[0].clientX);
+    }
+
+    function handleTouchMove(event: TouchEvent) {
+        setTouchEnd(event.targetTouches[0].clientX);
+    }
+
+    function handleTouchEnd() {
+        console.log(scroll);
+        if (touchStart - touchEnd > 150) {
+            scroll.el.scrollBy(0, touchStart - touchEnd);
+        }
+
+        if (touchStart - touchEnd < -150) {
+            window.scrollBy(0, touchStart - touchEnd);
+        }
+    }
+
     return (
         <div
             className={classNames('canvas-wrapper', {
@@ -69,6 +94,9 @@ const WebGL = () => {
                     near: 0.01,
                     far: 110,
                 }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
             >
                 <Preload all />
                 <Experience />

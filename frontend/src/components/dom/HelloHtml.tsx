@@ -40,7 +40,7 @@ const HelloHtml = ({ text, names, pair, pron }: Props) => {
                             <div className="hello-layout__personal" dangerouslySetInnerHTML={{ __html: text }}></div>
                         )}
                         <div className="hello-layout__sign">
-                            С наилучшими пожеланиями,
+                            {names === 'Мама и Папа' ? 'С любовью,' : 'С наилучшими пожеланиями,'}
                             <br />
                             Роман и Кристина
                         </div>
