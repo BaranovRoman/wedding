@@ -68,7 +68,7 @@ jobs:
             echo "Установка зависимостей..."
             mkdir -p logs
             cd frontend
-            npm ci --omit=dev --legacy-peer-deps
+            npm ci --omit=dev --legacy-peer-deps --ignore-scripts
             cd ..
 
             echo "Graceful reload (zero-downtime)..."
