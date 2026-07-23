@@ -1,0 +1,79 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci --legacy-peer-deps
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Pull latest code on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            set -e
+            cd /var/www/www-root/data/www/wedding.baranov-digital.ru
+            git fetch origin
+            git reset --hard origin/master
+
+      - name: Deploy build artifacts
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          source: "frontend/.next"
+          target: "/var/www/www-root/data/www/wedding.baranov-digital.ru"
+          strip_components: 0
+
+      - name: Install prod deps and reload service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            set -e
+            cd /var/www/www-root/data/www/wedding.baranov-digital.ru
+
+            echo "Установка зависимостей..."
+            mkdir -p logs
+            cd frontend
+            npm ci --omit=dev --legacy-peer-deps
+            cd ..
+
+            echo "Graceful reload (zero-downtime)..."
+            pm2 reload wedding-frontend || pm2 start ecosystem.config.js --only wedding-frontend
+
+            pm2 save
+
+            echo "Деплой завершен успешно"
